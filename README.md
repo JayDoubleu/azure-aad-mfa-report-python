@@ -1,5 +1,5 @@
 # azure-aad-mfa-report-python
-
+[![CodeQL](https://github.com/JayDoubleu/azure-aad-mfa-report-python/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/JayDoubleu/azure-aad-mfa-report-python/actions/workflows/codeql-analysis.yml)
 ## Prerequisites
 Make sure you have installed all of the following prerequisites on your machine:
 * Git - [Download & Install Git](https://git-scm.com/downloads).
