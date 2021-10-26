@@ -25,9 +25,9 @@ def handle_custom_ssl():
     if os.path.isfile(custom_ca_file):
         logger.info(f"Found custom CA file {custom_ca_file} ..")
         custom_ca_file_bytes = open(custom_ca_file, "rb").read()
-        ca_file = certifi.where()
-        logger.info(f"Injecting custom CA into {ca_file} ..")
-        with open(ca_file, "ab") as f:
+        venv_ca_path = certifi.where()
+        logger.info(f"Injecting custom CA into {venv_ca_path} ..")
+        with open(venv_ca_path, "ab") as f:
             f.write(custom_ca_file_bytes)
         logger.info("Done ..")
 
@@ -63,7 +63,7 @@ def get_tenant(headers):
     """
     try:
         response = requests.get(
-            "https://graph.microsoft.com/v1.0/organization", headers=headers
+            "https://graph.microsoft.com/v1.0/organization", headers=headers, timeout=50
         ).json()
         return response["value"][0]
     except Exception as e:
@@ -107,6 +107,7 @@ def get_auth_user_details(headers, endpoint, api_version="beta"):
             f"{endpoint}/myorganization/activities/authenticationMethodUserDetails",
             headers=headers,
             params=params,
+            timeout=50,
         )
         if hasattr(response, "json"):
             response = response.json()
