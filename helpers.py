@@ -63,7 +63,7 @@ def get_tenant(headers):
     """
     try:
         response = requests.get(
-            "https://graph.microsoft.com/v1.0/organization", headers=headers
+            "https://graph.microsoft.com/v1.0/organization", headers=headers, timeout=50
         ).json()
         return response["value"][0]
     except Exception as e:
@@ -107,6 +107,7 @@ def get_auth_user_details(headers, endpoint, api_version="beta"):
             f"{endpoint}/myorganization/activities/authenticationMethodUserDetails",
             headers=headers,
             params=params,
+            timeout=50,
         )
         if hasattr(response, "json"):
             response = response.json()
