@@ -25,9 +25,9 @@ def handle_custom_ssl():
     if os.path.isfile(custom_ca_file):
         logger.info(f"Found custom CA file {custom_ca_file} ..")
         custom_ca_file_bytes = open(custom_ca_file, "rb").read()
-        ca_file = certifi.where()
-        logger.info(f"Injecting custom CA into {ca_file} ..")
-        with open(ca_file, "ab") as f:
+        venv_ca_path = certifi.where()
+        logger.info(f"Injecting custom CA into {venv_ca_path} ..")
+        with open(venv_ca_path, "ab") as f:
             f.write(custom_ca_file_bytes)
         logger.info("Done ..")
 
