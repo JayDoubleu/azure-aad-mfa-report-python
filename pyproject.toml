@@ -5,7 +5,7 @@ description = ""
 authors = ["Jay W <40270505+JayDoubleu@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.7"
 azure-common = "^1.1.27"
 msrest = "^0.6.21"
 msrestazure = "^0.6.4"
