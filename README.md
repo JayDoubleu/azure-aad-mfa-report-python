@@ -4,7 +4,7 @@
 ## Prerequisites
 Make sure you have installed all of the following prerequisites on your machine:
 * Git - [Download & Install Git](https://git-scm.com/downloads).
-* Python 3.9 or higher - [Download & Install Python](https://www.python.org/downloads/).
+* Python 3.7 or higher - [Download & Install Python](https://www.python.org/downloads/).
 * Azure CLI - [Download & Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 * Poetry - [Download & Install Poetry](https://python-poetry.org/docs/#installation).
 
@@ -15,14 +15,14 @@ Make sure you have installed all of the following prerequisites on your machine:
   $ cd azure-aad-mfa-report-python
   ```
 - If you are behind SSL proxy place your custom CA file in PEM format at the root directory of this repository.
-  CA needs to be in PEM format and named "certificate.pem" . 
+  CA needs to be in PEM format and named "certificate.pem" .
   Script will try to detect this file and add it to certifi CA store within poetry's virtual environment.
-  
+
 - If you have multiple versions of python installed instruct poetry to use correct one: <br>
   `$ poetry env use python3.9`
-  
+
 - Install poetry dependencies: <br>
-  `$ poetry install`
+  `$ poetry install --no-dev`
 
 - Navigate to https://portal.azure.com and login to tenant which you want to run MFA report against.
 - Make sure your browser session is signed with MFA if one is enabled.

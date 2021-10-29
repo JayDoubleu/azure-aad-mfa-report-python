@@ -139,3 +139,6 @@ cython_debug/
 
 #Ignore all xlsx files
 *.xlsx
+
+#Ignore all pem files
+*.pem
