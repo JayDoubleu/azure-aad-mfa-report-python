@@ -6,6 +6,7 @@ import os.path
 import aiohttp
 import certifi
 import requests
+from shutil import copyfile
 from azure.common.credentials import get_azure_cli_credentials
 import openpyxl
 from openpyxl.worksheet.table import Table, TableStyleInfo
@@ -21,11 +22,20 @@ def handle_custom_ssl():
     by injecting locally stored PEM certificate into certifi store
     in virtual env.
     """
+    certifi_ca_file = certifi.where()
+    certifi_ca_file_original = f"{certifi_ca_file}.orig"
+    if os.path.isfile(certifi_ca_file_original):
+        # Restore original certifi pem if .orig exists
+        copyfile(certifi_ca_file_original, certifi_ca_file)
+    else:
+        # Backup original certifi pem
+        copyfile(certifi_ca_file, certifi_ca_file_original)
+
     custom_ca_file = "certificate.pem"
     if os.path.isfile(custom_ca_file):
         logger.info(f"Found custom CA file {custom_ca_file} ..")
         custom_ca_file_bytes = open(custom_ca_file, "rb").read()
-        venv_ca_path = certifi.where()
+        venv_ca_path = certifi_ca_file
         logger.info(f"Injecting custom CA into {venv_ca_path} ..")
         with open(venv_ca_path, "ab") as f:
             f.write(custom_ca_file_bytes)
